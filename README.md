@@ -1,19 +1,19 @@
 # MURA X-Ray Classification
 
-A deep learning project for classifying X-ray images using the MURA (MusculoSkeletal Radiographs) dataset with pre-trained ResNet50 and DenseNet121 models.
+A deep learning project for classifing X-ray images using the MURA (MusculoSkeletal Radiographs) dataset with pretrained ResNet50 and DenseNet121 models.
 
 ## Overview
 
-This project trains and deploys deep learning models to classify X-ray images as positive or negative for abnormalities. It includes:
-- **Model training** using PyTorch (model.ipynb)
-- **Web-based inference apps** using Streamlit
-- **Two UI versions**: basic and stylish
+This project trains deep learning models ResNet50 and DenseNet121 to classify X-ray images as positive or negative for abnormalities. 
+It includes:
+- **Model training** using PyTorch as dataloader (model.ipynb)
+- **Web-based inference apps** using Streamlit for a web interface.
 
 ## Features
 
 ### Core Features
-- **Automated X-Ray Classification**: Binary classification (normal/abnormal) with confidence scoring
-- **Multiple Model Support**: ResNet50 and DenseNet121 architectures with transfer learning
+- **Automated X-Ray Classification**: Binary classification 0for abnormality and 1 for normal with confidence scoring
+- **Multiple Model Support**: ResNet50 and DenseNet121 architectures with transfer learning and their variation
 - **Web Interface**: User-friendly Streamlit applications for real-time prediction
 - **Complete ML Pipeline**: From data loading to model deployment
 
@@ -153,19 +153,11 @@ pip install pillow streamlit scikit-learn numpy tqdm matplotlib
 
 **Training Configuration**:
 - Batch Size: 15
-- Learning Rate: 1e-4
-- Epochs: 5
-- Optimizer: Adam
-- Loss Function: 
-
+- Epochs: 5 (or more for better results)
+  
 #### Basic Version
 ```bash
 streamlit run app_basic.py
-```
-
-#### Stylish Version (Recommended)
-```bash
-streamlit run app_stylish.py
 ```
 
 **Web App Features**:
@@ -173,18 +165,13 @@ streamlit run app_stylish.py
 - Image upload interface
 - Real-time prediction display
 - Confidence score visualization
-
-### Using Different Ports
-If port 8501 is busy:
-```bash
-streamlit run app_stylish.py --server.port 8502
-```
+  
 
 ## Instructions for Testing
 
 ### Manual Testing
 
-1. **Mo   xdel Training Validation**:
+1. **Model Training Validation**:
    - Run `model.ipynb` completely
    - Verify checkpoint files are created in `checkpoints/`
    - Check training/validation accuracy plots
@@ -219,7 +206,7 @@ MURA-v1.1/valid/XR_WRIST/patient11349/study1_negative/image1.png
 
 ### Expected Results
 - **Validation Accuracy**: >85%
-- **Training Time**: ~2 hours on GPU
+- **Training Time**: ~3 hours on GPU
 - **Inference Time**: <3 seconds per image
 
 ### Evaluation Metrics
@@ -237,53 +224,38 @@ streamlit run app_stylish.py --server.port 8502
 ```
 
 **GPU Not Detected**:
-- App automatically falls back to CPU
-- For manual GPU forcing: Set `device = "cuda"` in app files
+- App directly starts training with CPU
+- For manual GPU use: Set `device = "cuda"` in app files for enabling GPU usage
 
 **Missing Checkpoint Files**:
 - Ensure training completed successfully
 - Check `checkpoints/` directory exists
-- Verify `.pth` files are not corrupted
-
-**Memory Issues**:
-- Reduce batch size in training
-- Close other applications
-- Use CPU-only mode if necessary
+- Verify `.pth` files are not corrupted(for best model validation and ploting graphs for comparision
 
 ### Error Messages
-- **"CUDA out of memory"**: Reduce batch size or use CPU
-- **"File not found"**: Check dataset path configuration
+- **"CUDA out of memory"**: Reduce batch size.
+- **"File not found"**: Check dataset path where i faced challenging in Google Collab so i used VS Code for easier approach 
 - **"Invalid image format"**: Ensure image is PNG/JPG/JPEG
 
-## Screenshots
-
-### Training Interface
-![Training Progress](screenshots/training_progress.png)
-
-### Web Application
-![Web Interface](screenshots/web_interface.png)
-
-### Prediction Results
-![Prediction Results](screenshots/prediction_results.png)
 
 ## Documentation
 
 - **[Project Statement](statement.md)**: Problem definition and scope
-- **[Project Report](PROJECT_REPORT.md)**: Comprehensive technical documentation
-- **[System Design](SYSTEM_DESIGN.md)**:(1) Architectur(0)e and UML diagrams
+- **[Project Report](PROJECT_REPORT.md)**: Technical data structure
+- **[System Design](SYSTEM_DESIGN.md)**: Architecture and UML diagrams
 
 ## Dataset Information
 
 ### MURA Dataset
-- **Total Images**: 40,005 musculoskeletal radiographs
+- **Total Images**: ~40000 musculoskeletal radiographs
 - **Body Parts**: 7 categories (elbow, finger, forearm, hand, humerus, shoulder, wrist)
-- **Classification**: Binary (normal vs abnormal)
+- **Classification**: Binary (normal 1 vs abnormal 0)
 - **Format**: PNG images with variable resolution
 
 ### Data Preprocessing
 - Resize to 224×224 pixels
 - Convert to RGB tensor
-- Normalize with ImageNet statistics
+- Normalize with ImageNet statictics
 - Mean: [0.485, 0.456, 0.406]
 - Std: [0.229, 0.224, 0.225]
 

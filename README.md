@@ -229,6 +229,10 @@ streamlit run app_stylish.py --server.port 8502
 - Check `checkpoints/` directory exists
 - Verify `.pth` files are not corrupted(for best model validation and ploting graphs for comparision
 
+**Checkpoints file not detected**:
+- Create a folder named checkpoints and rerun that model.ipynb cell again.
+- Check point folder was larger than 25 mb so github didnt allowed me to upload that here.
+
 ### Error Messages
 - **"CUDA out of memory"**: Reduce batch size.
 - **"File not found"**: Check dataset path where i faced challenging in Google Collab so i used VS Code for easier approach 

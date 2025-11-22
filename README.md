@@ -42,10 +42,7 @@ It includes:
 ### Development Tools
 - **Jupyter Notebook**: Interactive development environment
 - **Git**: Version control
-
-## Screenshots
-
-*Streamlit interface screenshots will be added here*
+  
 
 **Basic App Interface:**
 - Model selection and image upload
